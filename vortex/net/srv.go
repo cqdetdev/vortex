@@ -1,6 +1,7 @@
 package net
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"sync"
@@ -48,8 +49,8 @@ func (s *Server) handle(conn *websocket.Conn) {
 			log.Println("Error reading message:", err)
 			return
 		}
-	
-		log.Printf("Received message %v:\n", msg)
+
+		fmt.Println(msg)
 	}
 
 }

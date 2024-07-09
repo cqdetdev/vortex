@@ -1,4 +1,6 @@
-package proto
+package packet
+
+import "github.com/cqdetdev/vortex/vortex/proto"
 
 type Login struct {
 	Service string
@@ -6,10 +8,10 @@ type Login struct {
 }
 
 func (l *Login) ID() uint32 {
-	return LOGIN
+	return IDLogin
 }
 
-func (l *Login) Marshal(io IO) {
+func (l *Login) Marshal(io proto.IO) {
 	io.String(&l.Service)
 	io.String(&l.Token)
 }
