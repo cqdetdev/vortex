@@ -1,25 +1,26 @@
 # Vortex
 
-Websocket based microservice for whatever you wanna do
+Websocket based microservice made in Go for simplicity and concurrency
 
 # Mockups
 
 ```go
 type AuthService struct {
-    // DATA
+	Token string
 }
 
 func(s AuthService) Start() {
-
+	vortex.RegisterPackets(&FetchUserData{}, &CheckAuthState{}, &AuthStateResponse{})
+	// Or ditch and use a global response packet + json + packet request/response ids
 }
 
-// On data receive
 func(s AuthService) Recv(pk packet.Packet) {
 
 }
 ```
 
-# Other things
+# Notes
 
--   Uses gophertunnel encoding style for packets
--   Websockets because idk they're cool
+-   Uses [gophertunnel](https://github.com/sandertv/gophertunnel) packet encoding/decoding IO
+-   Websockets to promote more livetime data communications
+-   Possibly change to QUIC to do non-blocking async IO
