@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cqdetdev/vortex/vortex/auth"
-	"github.com/cqdetdev/vortex/vortex/internal"
-	"github.com/cqdetdev/vortex/vortex/proto"
-	"github.com/cqdetdev/vortex/vortex/proto/packet"
+	"github.com/vortex-service/vortex/vortex/auth"
+	"github.com/vortex-service/vortex/vortex/internal"
+	"github.com/vortex-service/vortex/vortex/proto"
+	"github.com/vortex-service/vortex/vortex/proto/packet"
 	"github.com/gorilla/websocket"
 )
 

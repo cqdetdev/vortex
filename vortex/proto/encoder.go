@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/cqdetdev/vortex/vortex/internal"
+	"github.com/vortex-service/vortex/vortex/internal"
 )
 
 // Encoder handles the encoding of Minecraft packets that are sent to an io.Writer. The packets are compressed

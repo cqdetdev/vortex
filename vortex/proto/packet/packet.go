@@ -1,6 +1,6 @@
 package packet
 
-import "github.com/cqdetdev/vortex/vortex/proto"
+import "github.com/vortex-service/vortex/vortex/proto"
 
 type Packet interface {
 	ID() uint32

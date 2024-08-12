@@ -3,7 +3,7 @@ package net
 import (
 	"fmt"
 
-	"github.com/cqdetdev/vortex/vortex/proto/packet"
+	"github.com/vortex-service/vortex/vortex/proto/packet"
 	"github.com/gorilla/websocket"
 )
 

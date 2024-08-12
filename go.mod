@@ -1,4 +1,4 @@
-module github.com/cqdetdev/vortex
+module github.com/vortex-service/vortex
 
 go 1.21.1
 

@@ -1,7 +1,7 @@
 package packet
 
 import (
-	"github.com/cqdetdev/vortex/vortex/proto"
+	"github.com/vortex-service/vortex/vortex/proto"
 )
 
 type Login struct {

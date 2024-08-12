@@ -1,6 +1,6 @@
 package vortex
 
-import "github.com/cqdetdev/vortex/vortex/net"
+import "github.com/vortex-service/vortex/vortex/net"
 
 type Vortex struct {
 	srv *net.Server
