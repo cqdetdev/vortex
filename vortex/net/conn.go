@@ -14,6 +14,6 @@ type Conn struct {
 func NewConn(conn *websocket.Conn) *Conn {
 	return &Conn{
 		conn: conn,
-		dec:  proto.NewDecoder(conn),
+		dec:  proto.NewDecoder(conn.NetConn()),
 	}
 }

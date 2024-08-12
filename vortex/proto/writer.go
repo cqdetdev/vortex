@@ -1,7 +1,6 @@
 package proto
 
 import (
-	"bytes"
 	"encoding/binary"
 	"fmt"
 	"image/color"
@@ -10,30 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/google/uuid"
-	"github.com/gorilla/websocket"
 )
-
-type wsWriter struct {
-	conn *websocket.Conn
-
-	buffer bytes.Buffer
-}
-
-func (w *wsWriter) Write(p []byte) (int, error) {
-	return w.buffer.Write(p)
-}
-
-func (w *wsWriter) WriteByte(x byte) error {
-	return w.buffer.WriteByte(x)
-}
-
-func (w *wsWriter) Buffer() *bytes.Buffer {
-	return &w.buffer
-}
-
-func newWSWriter(conn *websocket.Conn) *wsWriter {
-	return &wsWriter{conn: conn}
-}
 
 // Writer implements writing methods for data types from Minecraft packets. Each Packet implementation has one
 // passed to it when writing.

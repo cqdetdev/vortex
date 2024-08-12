@@ -10,36 +10,8 @@ import (
 	"unsafe"
 
 	"github.com/google/uuid"
-	"github.com/gorilla/websocket"
 )
 
-type wsReader struct {
-	conn *websocket.Conn
-}
-
-func newWSReader(conn *websocket.Conn) *wsReader {
-	return &wsReader{conn: conn}
-}
-
-func (r *wsReader) Read(p []byte) (int, error) {
-	_, data, err := r.conn.ReadMessage()
-	if err != nil {
-		return 0, err
-	}
-	copy(p, data)
-	return len(data), nil
-}
-
-func (r *wsReader) ReadByte() (byte, error) {
-	_, data, err := r.conn.ReadMessage()
-	if err != nil {
-		return 0, err
-	}
-	if len(data) == 0 {
-		return 0, io.EOF
-	}
-	return data[0], nil
-}
 
 type Reader struct {
 	r interface {
@@ -51,8 +23,10 @@ type Reader struct {
 }
 
 // NewReader creates a new Reader using the io.ByteReader passed as underlying source to read bytes from.
-func NewReader(conn *websocket.Conn, shieldID int32, enableLimits bool) *Reader {
-	r := newWSReader(conn)
+func NewReader(r interface {
+	io.Reader
+	io.ByteReader
+}, shieldID int32, enableLimits bool) *Reader {
 	return &Reader{r: r, shieldID: shieldID, limitsEnabled: enableLimits}
 }
 

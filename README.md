@@ -14,7 +14,7 @@ func(s AuthService) Start() {
 }
 
 // On data receive
-func(s AuthService) Recv(...args) {
+func(s AuthService) Recv(pk packet.Packet) {
 
 }
 ```

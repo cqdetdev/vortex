@@ -6,24 +6,19 @@ import (
 	"io"
 
 	"github.com/cqdetdev/vortex/vortex/internal"
-	"github.com/gorilla/websocket"
 )
 
 // Encoder handles the encoding of Minecraft packets that are sent to an io.Writer. The packets are compressed
 // and optionally encoded before they are sent to the io.Writer.
 type Encoder struct {
-	w *wsWriter
+	w io.Writer
 }
 
 // NewEncoder returns a new Encoder for the io.Writer passed. Each final packet produced by the Encoder is
 // sent with a single call to io.Writer.Write().
-func NewEncoder(c *websocket.Conn) *Encoder {
-	w := newWSWriter(c)
-	return &Encoder{
-		w: w,
-	}
+func NewEncoder(w io.Writer) *Encoder {
+	return &Encoder{w: w}
 }
-
 
 // Encode encodes the packets passed. It writes all of them as a single packet which is  compressed and
 // optionally encrypted.

@@ -3,8 +3,7 @@ package proto
 import (
 	"bytes"
 	"fmt"
-
-	"github.com/gorilla/websocket"
+	"io"
 )
 
 // Decoder handles the decoding of Minecraft packets sent through an io.Reader. These packets in turn contain
@@ -12,7 +11,7 @@ import (
 type Decoder struct {
 	// r holds the io.Reader that packets are read from if the reader does not implement packetReader. When
 	// this is the case, the buf field has a non-zero length.
-	r   *wsReader
+	r   io.Reader
 	buf []byte
 
 	// pr holds a packetReader (and io.Reader) that packets are read from if the io.Reader passed to
@@ -32,8 +31,10 @@ type packetReader interface {
 
 // NewDecoder returns a new decoder decoding data from the io.Reader passed. One read call from the reader is
 // assumed to consume an entire packet.
-func NewDecoder(c *websocket.Conn) *Decoder {
-	reader := newWSReader(c)
+func NewDecoder(reader io.Reader) *Decoder {
+	if pr, ok := reader.(packetReader); ok {
+		return &Decoder{checkPacketLimit: true, pr: pr}
+	}
 	return &Decoder{
 		r:                reader,
 		buf:              make([]byte, 1024*1024*3),
