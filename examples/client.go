@@ -25,11 +25,25 @@ func main() {
 	buf := bytes.NewBuffer(make([]byte, 0, 1024))
 
 	w := proto.NewWriter(buf, 1)
-	id := packet.IDLogin
+	id := uint32(100)
 	w.Varuint32(&id)
 	login.Marshal(w)
 
-	fmt.Printf("SENDING PACKET %v\n", buf.Bytes())
+	fmt.Printf("SENDING LOGIN PACKET %v\n", buf.Bytes())
+
+	err = c.WriteMessage(websocket.BinaryMessage, buf.Bytes())
+	if err != nil {
+		panic(err)
+	}
+
+	ping := &pingPacket{}
+	buf.Reset()
+	w = proto.NewWriter(buf, 1)
+	id = ping.ID()
+	w.Varuint32(&id)
+	ping.Marshal(w)
+
+	fmt.Printf("SENDING PING PACKET %v\n", buf.Bytes())
 
 	err = c.WriteMessage(websocket.BinaryMessage, buf.Bytes())
 	if err != nil {
@@ -49,3 +63,11 @@ func main() {
 
 	select {}
 }
+
+type pingPacket struct{}
+
+func (p *pingPacket) ID() uint32 {
+	return 100
+}
+
+func (p *pingPacket) Marshal(proto.IO) {}

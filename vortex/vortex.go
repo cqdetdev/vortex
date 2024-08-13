@@ -96,7 +96,7 @@ func (v *Vortex) handle(conn *websocket.Conn) {
 		pk.Marshal(reader)
 
 		if registeredPk {
-			v.handler.HandlePacket(c, &pk)
+			v.handler.HandlePacket(c, pk)
 		} else {
 			switch pk.ID() {
 			case packet.IDLogin:

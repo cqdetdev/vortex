@@ -7,7 +7,7 @@ import (
 )
 
 type Handler interface {
-	HandlePacket(conn *Conn, pk *packet.Packet)
+	HandlePacket(conn *Conn, pk packet.Packet)
 }
 
 func (s *Vortex) handleLogin(c *Conn, pk *packet.Login) {
