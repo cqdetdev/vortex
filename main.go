@@ -1,8 +1,13 @@
 package main
 
-import "github.com/vortex-service/vortex/vortex"
+import (
+	"github.com/vortex-service/vortex/vortex"
+	"github.com/vortex-service/vortex/vortex/auth"
+)
 
 func main() {
-	s := vortex.New()
+	s := vortex.NewService("database", auth.Auth{
+		Token: "TOKEN123",
+	})
 	s.Start()
 }

@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"fmt"
 
+	"github.com/gorilla/websocket"
 	"github.com/vortex-service/vortex/vortex/proto"
 	"github.com/vortex-service/vortex/vortex/proto/packet"
-	"github.com/gorilla/websocket"
 )
 
 func main() {
@@ -47,5 +47,6 @@ func main() {
 		}
 	}()
 
-	select {}
+	for {
+	}
 }

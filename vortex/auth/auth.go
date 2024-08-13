@@ -1,5 +1,6 @@
 package auth
 
 type Auth struct {
-	Token string
+	Token     string
+	Addresses []string
 }

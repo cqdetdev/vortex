@@ -1,13 +1,16 @@
-package net
+package vortex
 
 import (
 	"fmt"
 
 	"github.com/vortex-service/vortex/vortex/proto/packet"
-	"github.com/gorilla/websocket"
 )
 
-func (s *Server) handleLogin(c *websocket.Conn, pk *packet.Login) {
+type Handler interface {
+	HandlePacket(conn *Conn, pk *packet.Packet)
+}
+
+func (s *Vortex) handleLogin(c *Conn, pk *packet.Login) {
 	resp := &packet.AuthResponse{}
 	var closed bool
 	if s.auth.Token == pk.Token {
@@ -20,7 +23,7 @@ func (s *Server) handleLogin(c *websocket.Conn, pk *packet.Login) {
 		closed = true
 	}
 
-	err := s.WritePacket(c, pk, closed)
+	err := c.WritePacket(pk, closed)
 	if err != nil {
 		fmt.Println(err)
 	}
