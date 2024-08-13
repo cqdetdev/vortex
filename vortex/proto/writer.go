@@ -11,7 +11,7 @@ import (
 	"github.com/google/uuid"
 )
 
-// Writer implements writing methods for data types from Minecraft packets. Each Packet implementation has one
+// Writer implements writing methods for data types from packets. Each Packet implementation has one
 // passed to it when writing.
 // Writer implements methods where values are passed using a pointer, so that Reader and Writer have a
 // synonymous interface and both implement the IO interface.
