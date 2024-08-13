@@ -7,14 +7,22 @@ Websocket based microservice made in Go for simplicity and concurrency
 ```go
 type AuthService struct {
 	Token string
+	ExtraData any
+
+	Service vortex.Service
 }
 
 func(s AuthService) Start() {
-	vortex.RegisterPackets(&FetchUserData{}, &CheckAuthState{}, &AuthStateResponse{})
-	// Or ditch and use a global response packet + json + packet request/response ids
+	s.Service = vortex.NewService("user-database", auth.WithPassword("SECRET").WithIPWhitelist("12.34.56.78"))
+	s.Service.RegisterPackets(&FetchUserData{}, &CheckAuthState{}, &AuthStateResponse{})
+	s.Service.Start()
 }
 
-func(s AuthService) Recv(pk packet.Packet) {
+type Handler struct {
+	service *AuthService
+}
+
+func (h *Handler) HandlePacket(pk *packet.Packet) bool {
 
 }
 ```
