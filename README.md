@@ -34,6 +34,9 @@ func (h *Handler) HandlePacket(conn *vortex.Conn, pk *packet.Packet) {
 }
 ```
 
+# TODO
+- Proper connection/authentication handling
+
 # Notes
 
 -   Uses [gophertunnel](https://github.com/sandertv/gophertunnel) packet encoding/decoding IO

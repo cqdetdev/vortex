@@ -11,7 +11,7 @@ func main() {
 	s := vortex.NewService("database", auth.Auth{
 		Token: "TOKEN123",
 	})
-	s.RegisterPackets(&pingPacket{}, &pongPacket{})
+	s.RegisterPackets(&pingPacket{})
 	s.RegisterHandler(&Handler{})
 	s.Start()
 }
