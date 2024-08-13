@@ -1,6 +1,6 @@
 package main
 
-import "github.com/cqdetdev/vortex/vortex"
+import "github.com/vortex-service/vortex/vortex"
 
 func main() {
 	s := vortex.New()

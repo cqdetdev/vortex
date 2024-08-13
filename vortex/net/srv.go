@@ -8,11 +8,11 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gorilla/websocket"
 	"github.com/vortex-service/vortex/vortex/auth"
 	"github.com/vortex-service/vortex/vortex/internal"
 	"github.com/vortex-service/vortex/vortex/proto"
 	"github.com/vortex-service/vortex/vortex/proto/packet"
-	"github.com/gorilla/websocket"
 )
 
 type Server struct {
@@ -72,8 +72,11 @@ func (s *Server) handle(conn *websocket.Conn) {
 		}
 
 		var pk packet.Packet
-		if msg[0] == byte(packet.IDLogin) {
+		switch msg[0] {
+		case byte(packet.IDLogin):
 			pk = &packet.Login{}
+		default:
+			return
 		}
 		reader := proto.NewReader(bytes.NewReader(msg[1:]), 1, false)
 		pk.Marshal(reader)
